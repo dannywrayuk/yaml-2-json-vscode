@@ -10,7 +10,7 @@ const convert = (text: string) => {
   try {
     return { lang: "json", data: JSON.stringify(YAML.parse(text), null, 2) };
   } catch (e) {}
-  return { lang: "", data: "" };
+  return { lang: "error", data: "" };
 };
 
 export function activate(context: vscode.ExtensionContext) {
@@ -20,12 +20,20 @@ export function activate(context: vscode.ExtensionContext) {
     async () => {
       const activeEditor = vscode.window.activeTextEditor;
       if (!activeEditor) {
+        vscode.window.showErrorMessage("Error, no active editor.");
         return;
       }
+
       const document = activeEditor.document;
       const text = document.getText();
       const convertedText = convert(text);
 
+      if (convertedText.lang === "error") {
+        vscode.window.showErrorMessage(
+          `Error parsing: ${document.fileName} Are you sure it's valid JSON or YAML?`
+        );
+        return;
+      }
       const documentPath = path.parse(document.fileName);
       const altFile = !documentPath.ext
         ? document.fileName
@@ -35,22 +43,32 @@ export function activate(context: vscode.ExtensionContext) {
             ext: "." + convertedText.lang,
           });
 
-      fs.writeFileSync(altFile, convertedText.data);
-      const tempDocument = await vscode.workspace.openTextDocument(altFile);
-      if (documentPath.ext) {
-        await vscode.commands.executeCommand(
-          "workbench.action.closeActiveEditor"
-        );
-        fs.rmSync(document.fileName);
+      await document.save();
+      try {
+        fs.writeFileSync(altFile, convertedText.data);
+      } catch (e) {
+        vscode.window.showErrorMessage("Error writing document.");
+        return;
       }
+
+      await vscode.commands.executeCommand(
+        "workbench.action.closeActiveEditor"
+      );
+      if (documentPath.ext) {
+        try {
+          fs.rmSync(document.fileName);
+        } catch (e) {
+          vscode.window.showErrorMessage("Error removing document.");
+        }
+      }
+      const newDocument = await vscode.workspace.openTextDocument(altFile);
+      await newDocument.save();
       await vscode.languages.setTextDocumentLanguage(
-        tempDocument,
+        newDocument,
         convertedText.lang
       );
-      await tempDocument.save();
-      await vscode.window.showTextDocument(tempDocument);
+      await vscode.window.showTextDocument(newDocument);
     }
   );
-
   context.subscriptions.push(disposable);
 }
