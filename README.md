@@ -1,71 +1,73 @@
-# yaml-2-json README
+# Turborepo starter
 
-This is the README for your extension "yaml-2-json". After writing up a brief description, we recommend including the following sections.
+This is an official npm starter turborepo.
 
-## Features
+## What's inside?
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+This turborepo uses [npm](https://www.npmjs.com/) as a package manager. It includes the following packages/apps:
 
-For example if there is an image subfolder under your extension project workspace:
+### Apps and Packages
 
-\!\[feature X\]\(images/feature-x.png\)
+- `docs`: a [Next.js](https://nextjs.org) app
+- `web`: another [Next.js](https://nextjs.org) app
+- `ui`: a stub React component library shared by both `web` and `docs` applications
+- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-## Requirements
+### Utilities
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+This turborepo has some additional tools already setup for you:
 
-## Extension Settings
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [ESLint](https://eslint.org/) for code linting
+- [Prettier](https://prettier.io) for code formatting
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+### Build
 
-For example:
+To build all apps and packages, run the following command:
 
-This extension contributes the following settings:
+```
+cd my-turborepo
+npm run build
+```
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+### Develop
 
-## Known Issues
+To develop all apps and packages, run the following command:
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+```
+cd my-turborepo
+npm run dev
+```
 
-## Release Notes
+### Remote Caching
 
-Users appreciate release notes as you update your extension.
+Turborepo can use a technique known as [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
 
-### 1.0.0
+By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
 
-Initial release of ...
+```
+cd my-turborepo
+npx turbo login
+```
 
-### 1.0.1
+This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
 
-Fixed issue #.
+Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
 
-### 1.1.0
+```
+npx turbo link
+```
 
-Added features X, Y, and Z.
+## Useful Links
 
----
+Learn more about the power of Turborepo:
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- [Pipelines](https://turborepo.org/docs/core-concepts/pipelines)
+- [Caching](https://turborepo.org/docs/core-concepts/caching)
+- [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching)
+- [Scoped Tasks](https://turborepo.org/docs/core-concepts/scopes)
+- [Configuration Options](https://turborepo.org/docs/reference/configuration)
+- [CLI Usage](https://turborepo.org/docs/reference/command-line-reference)
