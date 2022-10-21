@@ -1,15 +1,19 @@
 import * as vscode from "vscode";
-import * as YAML from "yaml";
 import * as fs from "fs";
 import * as path from "path";
+import * as losslessYaml from "lossless-yaml-2-json";
 
 const convert = (text: string) => {
   try {
-    return { lang: "yaml", data: YAML.stringify(JSON.parse(text)) };
-  } catch (e) {}
+    return { lang: "yaml", data: losslessYaml.jtoy(text) };
+  } catch (e) {
+    console.log(e);
+  }
   try {
-    return { lang: "json", data: JSON.stringify(YAML.parse(text), null, 2) };
-  } catch (e) {}
+    return { lang: "json", data: losslessYaml.ytoj(text) };
+  } catch (e) {
+    console.log(e);
+  }
   return { lang: "error", data: "" };
 };
 

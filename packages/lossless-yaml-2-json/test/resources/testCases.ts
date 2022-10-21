@@ -392,4 +392,14 @@ keyC: *anchorC
   "&anchorC": "keyB:1"
 }`,
   },
+  {
+    description: "numbers?",
+    yaml: `keyA: valueA
+keyB: 6969
+`,
+    json: `{
+  "keyA": "valueA",
+  "keyB": 6969
+}`,
+  },
 ];
