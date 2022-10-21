@@ -1,7 +1,3 @@
-// A launch configuration that compiles the extension and then opens it inside a new window
-// Use IntelliSense to learn about possible attributes.
-// Hover to view descriptions of existing attributes.
-// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 {
   "version": "0.2.0",
   "configurations": [
@@ -10,22 +6,9 @@
       "type": "extensionHost",
       "request": "launch",
       "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}/apps/yaml-2-json-vscode"
+        "--extensionDevelopmentPath=${workspaceFolder}/yaml-2-json-vscode"
       ],
-      "outFiles": ["${workspaceFolder}/apps/yaml-2-json-vscode/out/**/*.js"],
-      "preLaunchTask": "${defaultBuildTask}"
-    },
-    {
-      "name": "Extension Tests",
-      "type": "extensionHost",
-      "request": "launch",
-      "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}/apps/yaml-2-json-vscode",
-        "--extensionTestsPath=${workspaceFolder}/apps/yaml-2-json-vscode/out/test/suite/index"
-      ],
-      "outFiles": [
-        "${workspaceFolder}/apps/yaml-2-json-vscode/out/test/**/*.js"
-      ],
+      "outFiles": ["${workspaceFolder}/yaml-2-json-vscode/dist/**/*.js"],
       "preLaunchTask": "${defaultBuildTask}"
     }
   ]

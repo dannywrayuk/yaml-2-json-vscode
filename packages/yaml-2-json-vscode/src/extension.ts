@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
-import * as losslessYaml from "lossless-yaml-2-json";
+import * as losslessYaml from "ly2j";
 
 const convert = (text: string) => {
   try {
@@ -18,9 +18,9 @@ const convert = (text: string) => {
 };
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log("Y2J is now active!");
+  console.log("YJC is now active!");
   const disposable = vscode.commands.registerCommand(
-    "y2j.toggleFiletype",
+    "yjc.toggleFiletype",
     async () => {
       const activeEditor = vscode.window.activeTextEditor;
       if (!activeEditor) {

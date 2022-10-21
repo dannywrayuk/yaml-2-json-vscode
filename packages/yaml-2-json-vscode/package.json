@@ -1,7 +1,7 @@
 {
-  "name": "yaml-2-json",
-  "displayName": "yaml-2-json",
-  "description": "VS Code Extension that replaces YAML with JSON",
+  "name": "yaml-json-converter-vscode",
+  "displayName": "YAML to JSON Converter",
+  "description": "Lossless conversion between YAML and JSON",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.71.0"
@@ -9,15 +9,15 @@
   "categories": [
     "Other"
   ],
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "activationEvents": [
-    "onCommand:y2j.toggleFiletype"
+    "onCommand:yjc.toggleFiletype"
   ],
   "contributes": {
     "commands": [
       {
-        "command": "y2j.toggleFiletype",
-        "title": "Convert between YAML and JSON"
+        "command": "yjc.toggleFiletype",
+        "title": "Toggle between YAML and JSON"
       }
     ]
   },
@@ -39,7 +39,6 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "lossless-yaml-2-json": "*",
-    "yaml": "^2.1.1"
+    "ly2j": "*"
   }
 }
