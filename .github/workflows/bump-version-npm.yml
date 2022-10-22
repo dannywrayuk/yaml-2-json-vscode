@@ -36,13 +36,11 @@ jobs:
         run: echo "NEW_VERSION=$(npm run version --workspace=ly2j --silent)" >> $GITHUB_ENV
 
       - name: Push Bump
-        run: git add . && git commit -m "🚀 Release ${{ inputs.workspace }} v${{ env.NEW_VERSION }} (${{ inputs.type }})"
-        run: git push
+        run: git add . && git commit -m "🚀 Release ${{ inputs.workspace }} v${{ env.NEW_VERSION }} (${{ inputs.type }})" && git push
 
       - name: Push Tags
         if: ${{ inputs.tag-version }}
         run: git push --tags
-
 
       - name: Create Release
         if: ${{ inputs.tag-version }}
