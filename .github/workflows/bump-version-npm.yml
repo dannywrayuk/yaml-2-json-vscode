@@ -30,10 +30,14 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Version Bump
-        run: npm version ${{ inputs.type }} -m "🚀 Release ${{ inputs.workspace }} v%s (${{ inputs.type }})" ${{ (inputs.tag-version && '') || '--no-git-tag-version' }} --workspace=${{ inputs.workspace }} --no-package-lock # Not ideal, but turborepo is broken https://github.com/vercel/turborepo/issues/1749
+        run: npm version ${{ inputs.type }} -m "🚀 Release ${{ inputs.workspace }} v%s (${{ inputs.type }})" --workspace=${{ inputs.workspace }} --no-package-lock # Not ideal, but turborepo is broken https://github.com/vercel/turborepo/issues/1749
 
       - name: Push Bump
-        run: git push && git push --tags
+        run: git push
+
+      - name: Push Tags
+        if: ${{ inputs.tag-version }}
+        run: git push --tags
 
       - name: Store New Version
         run: echo "NEW_VERSION=$(npm pkg get version | sed 's/"//g')" >> $GITHUB_ENV

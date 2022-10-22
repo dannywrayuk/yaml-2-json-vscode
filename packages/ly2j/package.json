@@ -25,5 +25,9 @@
   },
   "dependencies": {
     "yaml": "^2.1.2"
-  }
+  },
+  "files": [
+    "dist/**",
+    "README.md"
+  ]
 }
