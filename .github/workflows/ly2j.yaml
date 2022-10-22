@@ -1,4 +1,4 @@
-name: Push Event
+name: "ly2j: Push Event"
 on:
   push:
     branches: [master]
