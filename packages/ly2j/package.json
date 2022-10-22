@@ -8,7 +8,8 @@
     "build": "tsc",
     "dev": "tsc -w",
     "test": "jest",
-    "test:w": "jest --watch"
+    "test:w": "jest --watch",
+    "version": "echo $npm_package_version"
   },
   "repository": {
     "type": "git",
