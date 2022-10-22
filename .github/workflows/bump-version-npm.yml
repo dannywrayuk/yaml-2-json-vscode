@@ -3,8 +3,16 @@ on:
   workflow_call:
     inputs:
       type:
-        required: true
+        required: false
         type: string
+        default: ${{(startsWith(github.event.head_commit.message, '(minor)') && 'minor') || (startsWith(github.event.head_commit.message, '(major)') && 'major') || 'patch'}}
+      tag-version:
+        required: false
+        type: boolean
+        default: false
+      workspace:
+        type: string
+        required: true
 
 jobs:
   bump-version:
@@ -22,7 +30,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Version Bump
-        run: npm version ${{ inputs.type }} -m "🚀 Release v%s (${{ inputs.type }})"
+        run: npm version ${{ inputs.type }} -m "🚀 Release ${{ inputs.workspace }} v%s (${{ inputs.type }})" ${{ (inputs.tag-version && '') || '--no-git-tag-version' }} --workspace=${{ inputs.workspace }}
 
       - name: Push Bump
         run: git push && git push --tags
@@ -31,6 +39,7 @@ jobs:
         run: echo "NEW_VERSION=$(npm pkg get version | sed 's/"//g')" >> $GITHUB_ENV
 
       - name: Create Release
+        if: ${{ inputs.tag-version }}
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

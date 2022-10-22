@@ -1,6 +1,10 @@
 name: Build and Test
 on:
   workflow_call:
+    inputs:
+      workspace:
+        type: string
+        required: true
 
 jobs:
   build-test:
@@ -14,7 +18,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: npm run build --workspace=${{ inputs.workspace }}
 
       - name: Test
         run: npm run test
@@ -22,5 +26,5 @@ jobs:
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build-output
-          path: dist
+          name: build-output-${{ inputs.workspace }}
+          path: ./packages/${{ inputs.workspace }}/dist

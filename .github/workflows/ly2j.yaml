@@ -14,17 +14,21 @@ jobs:
   build-test:
     name: 🛠 Build and Test
     uses: ./.github/workflows/build-test.yml
+    with:
+      workspace: ly2j
   bump-version:
     name: 📈 Bump Package Version
     if: github.ref == 'refs/heads/master'
     needs: build-test
-    uses: ./.github/workflows/bump-version.yml
+    uses: ./.github/workflows/bump-version-npm.yml
     secrets: inherit
     with:
-      type: ${{(startsWith(github.event.head_commit.message, '(minor)') && 'minor') || (startsWith(github.event.head_commit.message, '(major)') && 'major') || 'patch'}}
+      workspace: ly2j
   publish:
     name: 🚀 Publish
     if: github.ref == 'refs/heads/master'
     needs: bump-version
-    uses: ./.github/workflows/publish.yml
+    uses: ./.github/workflows/publish-npm.yml
     secrets: inherit
+    with:
+      workspace: ly2j

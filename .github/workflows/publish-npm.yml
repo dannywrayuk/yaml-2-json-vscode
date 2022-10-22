@@ -1,6 +1,10 @@
 name: Publish
 on:
   workflow_call:
+    inputs:
+      workspace:
+        type: string
+        required: true
 
 jobs:
   publish:
@@ -19,10 +23,10 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-          name: build-output
-          path: dist
+          name: build-output-${{ inputs.workspace }}
+          path: ./packages/${{ inputs.workspace }}/dist
 
       - name: Publish
-        run: npm publish --access public
+        run: npm publish --access public --workspace=${{ inputs.workspace }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
