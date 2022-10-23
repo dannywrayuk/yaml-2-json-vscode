@@ -18,6 +18,9 @@ jobs:
           name: build-output
           path: ./
 
+      - name: Debug ls
+        run: ls -a
+
       - name: Install Dependencies
         run: npm ci
 
