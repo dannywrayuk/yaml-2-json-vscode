@@ -393,13 +393,33 @@ keyC: *anchorC
 }`,
   },
   {
-    description: "numbers?",
+    description: "number as keyvalue",
     yaml: `keyA: valueA
 keyB: 6969
 `,
     json: `{
   "keyA": "valueA",
   "keyB": 6969
+}`,
+  },
+  {
+    description: "boolean as keyvalue",
+    yaml: `keyA: valueA
+keyB: true
+`,
+    json: `{
+  "keyA": "valueA",
+  "keyB": true
+}`,
+  },
+  {
+    description: "value containing a star",
+    yaml: `keyA: "*"
+keyB: valueB
+`,
+    json: `{
+  "keyA": "*",
+  "keyB": "valueB"
 }`,
   },
 ];

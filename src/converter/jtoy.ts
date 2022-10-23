@@ -73,7 +73,7 @@ const traverse = (node: TreeParentCollection) => {
       }
     }
   }
-  if (/^\*/.test(tree.value?.value as string)) {
+  if (/^\*.+/.test(tree.value?.value as string)) {
     tree.value = new Alias(
       (tree.value?.value as string).substring(1)
     ) as YamlNode;

@@ -2,6 +2,7 @@
   "name": "yaml-json-converter",
   "displayName": "YAML to JSON Converter",
   "description": "Lossless conversion between YAML and JSON",
+  "icon": "icon.png",
   "publisher": "dannywrayuk",
   "version": "0.0.7",
   "engines": {
@@ -52,6 +53,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dannywrayuk/yaml-json-converter.git"
+    "url": "https://github.com/dannywrayuk/yaml-json-converter.git"
   }
 }
