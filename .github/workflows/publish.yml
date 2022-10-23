@@ -23,10 +23,5 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-          name: build-output-${{ inputs.workspace }}
-          path: ./packages/${{ inputs.workspace }}/dist
-
-      - name: Publish
-        run: npm publish --access public --workspace=${{ inputs.workspace }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          name: build-output
+          path: ./packages/yaml-json-converter-vscode/dist

@@ -1,10 +1,6 @@
 name: Build and Test
 on:
   workflow_call:
-    inputs:
-      workspace:
-        type: string
-        required: true
 
 jobs:
   build-test:
@@ -18,7 +14,7 @@ jobs:
         run: npm i --no-package-lock # Not ideal, but turborepo is broken https://github.com/vercel/turborepo/issues/1749
 
       - name: Build
-        run: npm run build --workspace=${{ inputs.workspace }}
+        run: npm run build
 
       - name: Test
         run: npm run test
@@ -26,5 +22,5 @@ jobs:
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build-output-${{ inputs.workspace }}
-          path: ./packages/${{ inputs.workspace }}/dist
+          name: build-output
+          path: ./packages/yaml-json-converter-vscode/dist

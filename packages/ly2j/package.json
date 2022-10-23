@@ -1,6 +1,6 @@
 {
   "name": "ly2j",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A lossless YAML to JSON (and back) converter",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

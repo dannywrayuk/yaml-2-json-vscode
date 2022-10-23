@@ -1,13 +1,13 @@
-name: "ly2j: Push Event"
+name: "Push Event"
 on:
   push:
     branches: [master]
     paths:
-      - "./packages/ly2j/src/**.ts"
+      - "./packages/*/src/**.ts"
   pull_request:
     branches: "*"
     paths:
-      - "./packages/ly2j/src/**.ts"
+      - "./packages/*/src/**.ts"
   workflow_dispatch:
 
 jobs:

@@ -23,7 +23,8 @@
   },
   "scripts": {
     "build": "tsc -p ./",
-    "dev": "tsc -watch -p ./"
+    "dev": "tsc -watch -p ./",
+    "version": "echo $npm_package_version"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
