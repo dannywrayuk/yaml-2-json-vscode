@@ -18,5 +18,8 @@ jobs:
           name: build-output
           path: ./dist
 
+      - name: Install Dependencies
+        run: npm ci
+
       - name: Publish Extension
         run: npx vsce publish -p ${{ secrets.AZURE_TOKEN }}
