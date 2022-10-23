@@ -1,4 +1,4 @@
-import { ytoj, jtoy } from "../src/index";
+import { ytoj, jtoy } from "../src/converter/index";
 import { testCase } from "./resources/types";
 import { testCases } from "./resources/testCases";
 

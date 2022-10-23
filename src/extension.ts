@@ -1,16 +1,16 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
-import * as losslessYaml from "ly2j";
+import * as converter from "./converter";
 
 const convert = (text: string) => {
   try {
-    return { lang: "yaml", data: losslessYaml.jtoy(text) };
+    return { lang: "yaml", data: converter.jtoy(text) };
   } catch (e) {
     console.log(e);
   }
   try {
-    return { lang: "json", data: losslessYaml.ytoj(text) };
+    return { lang: "json", data: converter.ytoj(text) };
   } catch (e) {
     console.log(e);
   }

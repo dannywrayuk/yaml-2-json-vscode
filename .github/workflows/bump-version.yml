@@ -23,10 +23,18 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Version Bump
-        run: npm version ${{ inputs.type }} --workspace=yaml-json-converter-vscode --no-package-lock # Not ideal, but turborepo is broken https://github.com/vercel/turborepo/issues/1749
-
-      - name: Store New Version
-        run: echo "NEW_VERSION=$(npm run version --workspace=yaml-json-converter-vscode --silent)" >> $GITHUB_ENV
+        run: npm version ${{ inputs.type }} -m "🚀 Release v%s (${{ inputs.type }})"
 
       - name: Push Bump
-        run: git add . && git commit -m "🚀 Release v${{ env.NEW_VERSION }} (${{ inputs.type }})" && git push
+        run: git push && git push --tags
+
+      - name: Store New Version
+        run: echo "NEW_VERSION=$(npm run version --silent)" >> $GITHUB_ENV
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.NEW_VERSION }}
+          release_name: Release v${{ env.NEW_VERSION }}

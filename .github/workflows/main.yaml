@@ -3,11 +3,9 @@ on:
   push:
     branches: [master]
     paths:
-      - "./packages/*/src/**.ts"
+      - "./src/**.ts"
   pull_request:
     branches: "*"
-    paths:
-      - "./packages/*/src/**.ts"
   workflow_dispatch:
 
 jobs:

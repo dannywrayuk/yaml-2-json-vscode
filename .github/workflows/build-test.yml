@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Dependencies
-        run: npm i --no-package-lock # Not ideal, but turborepo is broken https://github.com/vercel/turborepo/issues/1749
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -19,8 +19,11 @@ jobs:
       - name: Test
         run: npm run test
 
+      - name: Package
+        run: npm run package
+
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v3
         with:
           name: build-output
-          path: ./packages/yaml-json-converter-vscode/dist
+          path: ./*.vsix
