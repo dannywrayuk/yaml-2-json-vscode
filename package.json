@@ -1,5 +1,5 @@
 {
-  "name": "yaml-json-converter-vscode",
+  "name": "yaml-json-converter",
   "displayName": "YAML to JSON Converter",
   "description": "Lossless conversion between YAML and JSON",
   "publisher": "dannywrayuk",
