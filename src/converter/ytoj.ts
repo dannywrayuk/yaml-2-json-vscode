@@ -56,8 +56,6 @@ const traverse = (node: TreeParentCollection) => {
     typeof tree.value?.value !== "number" &&
     tree.value?.value !== null
   ) {
-    console.log(tree.value?.value);
-
     if (tree.key?.value === "<<") {
       tree.key.value = ("<<" + tree.value?.source) as YamlNode;
     }
