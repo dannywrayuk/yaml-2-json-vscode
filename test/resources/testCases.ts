@@ -422,4 +422,16 @@ keyB: valueB
   "keyB": "valueB"
 }`,
   },
+  {
+    description: "a null keyvalue",
+    yaml: `keyA: valueA
+keyB: null
+keyC: valueC
+`,
+    json: `{
+  "keyA": "valueA",
+  "keyB": null,
+  "keyC": "valueC"
+}`,
+  },
 ];
