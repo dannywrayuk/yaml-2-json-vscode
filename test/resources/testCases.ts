@@ -270,7 +270,7 @@ keyC: *anchorB
     json: `{
   "keyA": "valueA",
   "keyB": "valueB",
-  "keyC": "*anchorB",
+  "keyC": "source: *anchorB",
   "&anchorB": "keyB"
 }`,
   },
@@ -288,7 +288,7 @@ keyC: *anchorB
     "nestA": "valueX",
     "nestB": "valueY"
   },
-  "keyC": "*anchorB",
+  "keyC": "source: *anchorB",
   "&anchorB": "keyB"
 }`,
   },
@@ -309,7 +309,7 @@ keyC:
     "nestB": "valueY"
   },
   "keyC": {
-    "<<anchorB": "*anchorB",
+    "<<anchorB": "source: *anchorB",
     "nestA": "valueZ"
   },
   "&anchorB": "keyB"
@@ -340,9 +340,9 @@ keyD:
     "nestB": "valueY"
   },
   "keyD": {
-    "<<anchorB": "*anchorB",
+    "<<anchorB": "source: *anchorB",
     "nestA": "valueZ",
-    "<<anchorC": "*anchorC"
+    "<<anchorC": "source: *anchorC"
   },
   "&anchorB": "keyB",
   "&anchorC": "keyC"
@@ -366,8 +366,8 @@ keyC:
     "&anchorY": "nestB"
   },
   "keyC": {
-    "nestA": "*anchorB",
-    "nestB": "*anchorY"
+    "nestA": "source: *anchorB",
+    "nestB": "source: *anchorY"
   },
   "&anchorB": "keyB"
 }`,
@@ -388,7 +388,7 @@ keyC: *anchorC
     "array2",
     "array3"
   ],
-  "keyC": "*anchorC",
+  "keyC": "source: *anchorC",
   "&anchorC": "keyB:1"
 }`,
   },
@@ -419,6 +419,26 @@ keyB: valueB
 `,
     json: `{
   "keyA": "*",
+  "keyB": "valueB"
+}`,
+  },
+  {
+    description: "value containing a star and word",
+    yaml: `keyA: "*something"
+keyB: valueB
+`,
+    json: `{
+  "keyA": "*something",
+  "keyB": "valueB"
+}`,
+  },
+  {
+    description: "value containing a wildcard",
+    yaml: `keyA: "*.*"
+keyB: valueB
+`,
+    json: `{
+  "keyA": "*.*",
   "keyB": "valueB"
 }`,
   },

@@ -60,7 +60,7 @@ const traverse = (node: TreeParentCollection) => {
       tree.key.value = ("<<" + tree.value?.source) as YamlNode;
     }
 
-    const value = new Scalar("*" + tree.value?.source);
+    const value = new Scalar("source: *" + tree.value?.source);
     tree.value = value as YamlNode;
   }
 };

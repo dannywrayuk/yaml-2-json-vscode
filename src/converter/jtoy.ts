@@ -12,6 +12,26 @@ export const jtoy = (json: string) => {
   return yamlString;
 };
 
+const applyAnchor = (element: YamlNode, tree: YamlNode) => {
+  if (element) {
+    let anchorValue;
+    if (element.value?.value) {
+      anchorValue = new Scalar(element.value?.value);
+      anchorValue.anchor = (tree.key?.value as string).substring(1);
+      element.value = anchorValue as YamlNode;
+    }
+    if (element.value) {
+      element.anchor = (tree.key?.value as string).substring(1) as YamlNode;
+    }
+    if (element.value?.items) {
+      anchorValue = new YAMLMap();
+      anchorValue.items = element.value?.items as any;
+      anchorValue.anchor = (tree.key?.value as string).substring(1);
+      element.value = anchorValue as YamlNode;
+    }
+  }
+};
+
 const traverse = (node: TreeParentCollection) => {
   const tree = node.tree;
   if (Array.isArray(tree)) {
@@ -40,42 +60,22 @@ const traverse = (node: TreeParentCollection) => {
       const keyIndex = (node.parent?.tree as Array<any>).findIndex(
         (x) => x?.key?.value === anchorKey
       );
-      const applyAnchor = (element: YamlNode) => {
-        if (element) {
-          let anchorValue;
-          if (element.value?.value) {
-            anchorValue = new Scalar(element.value?.value);
-            anchorValue.anchor = (tree.key?.value as string).substring(1);
-            element.value = anchorValue as YamlNode;
-          }
-          if (element.value) {
-            element.anchor = (tree.key?.value as string).substring(
-              1
-            ) as YamlNode;
-          }
-          if (element.value?.items) {
-            anchorValue = new YAMLMap();
-            anchorValue.items = element.value?.items as any;
-            anchorValue.anchor = (tree.key?.value as string).substring(1);
-            element.value = anchorValue as YamlNode;
-          }
-        }
-      };
 
       if (Number(anchorKeyIndex) >= 0) {
         applyAnchor(
           node.parent.tree[keyIndex]?.value?.items?.[
             Number(anchorKeyIndex)
-          ] as YamlNode
+          ] as YamlNode,
+          tree
         );
       } else {
-        applyAnchor(node.parent.tree[keyIndex]);
+        applyAnchor(node.parent.tree[keyIndex], tree);
       }
     }
   }
-  if (/^\*.+/.test(tree.value?.value as string)) {
+  if (/^source\:\s\*.+/.test(tree.value?.value as string)) {
     tree.value = new Alias(
-      (tree.value?.value as string).substring(1)
+      (tree.value?.value as string).substring(9)
     ) as YamlNode;
     if (tree.key?.value && /^<</.test(tree.key?.value as string)) {
       tree.key.value = "<<" as YamlNode;
