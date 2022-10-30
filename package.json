@@ -19,9 +19,20 @@
     "commands": [
       {
         "command": "yjc.toggleFiletype",
-        "title": "Toggle between YAML and JSON"
+        "title": "Toggle between YAML and JSON",
+        "category": "YAML/JSON",
+        "icon": "icon.png"
       }
-    ]
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "editorLangId == json || editorLangId == yaml",
+          "command": "yjc.toggleFiletype",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "package": "vsce package",
