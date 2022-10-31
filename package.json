@@ -2,7 +2,7 @@
   "name": "yaml-json-converter",
   "displayName": "YAML to JSON Converter",
   "description": "Lossless conversion between YAML and JSON",
-  "icon": "icon.png",
+  "icon": "images/icon.png",
   "publisher": "dannywrayuk",
   "version": "0.0.12",
   "engines": {
@@ -21,7 +21,7 @@
         "command": "yjc.toggleFiletype",
         "title": "Toggle between YAML and JSON",
         "category": "YAML/JSON",
-        "icon": "icon.png"
+        "icon": "images/icon.png"
       }
     ],
     "menus": {
