@@ -454,4 +454,20 @@ keyC: valueC
   "keyC": "valueC"
 }`,
   },
+  {
+    description: "an anchor on an array",
+    yaml: `keyA: &anchorA
+  - keyB: valueB
+    keyC: valueC
+`,
+    json: `{
+  "keyA": [
+    {
+      "keyB": "valueB",
+      "keyC": "valueC"
+    }
+  ],
+  "&anchorA": "keyA"
+}`,
+  },
 ];

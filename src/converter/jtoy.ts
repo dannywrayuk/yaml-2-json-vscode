@@ -1,4 +1,4 @@
-import YAML, { Alias, Scalar, YAMLMap } from "yaml";
+import YAML, { Alias, Scalar, YAMLMap, YAMLSeq } from "yaml";
 import { TreeParentCollection, YamlNode } from "./types";
 
 export const jtoy = (json: string) => {
@@ -24,7 +24,11 @@ const applyAnchor = (element: YamlNode, tree: YamlNode) => {
       element.anchor = (tree.key?.value as string).substring(1) as YamlNode;
     }
     if (element.value?.items) {
-      anchorValue = new YAMLMap();
+      if (element.value.constructor.name === "YAMLSeq") {
+        anchorValue = new YAMLSeq();
+      } else {
+        anchorValue = new YAMLMap();
+      }
       anchorValue.items = element.value?.items as any;
       anchorValue.anchor = (tree.key?.value as string).substring(1);
       element.value = anchorValue as YamlNode;
