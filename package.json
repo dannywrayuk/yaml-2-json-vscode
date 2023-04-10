@@ -12,10 +12,19 @@
     "Other"
   ],
   "main": "./dist/extension.js",
-  "activationEvents": [
-    "onCommand:yjc.toggleFiletype"
-  ],
+  "activationEvents": [],
   "contributes": {
+    "configuration": {
+      "title": "YAML to JSON Converter",
+      "properties": {
+        "yjc.anchorInterop": {
+          "title": "YAML Anchor interop with JSON",
+          "type": "boolean",
+          "default": true,
+          "description": "Embed YAML anchors in JSON to allow for lossless conversion. (slightly experimental)"
+        }
+      }
+    },
     "commands": [
       {
         "command": "yjc.toggleFiletype",
