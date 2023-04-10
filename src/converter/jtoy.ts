@@ -1,13 +1,13 @@
-import * as vscode from "vscode";
 import YAML, { Alias, Scalar, YAMLMap, YAMLSeq } from "yaml";
 import { TreeParentCollection, YamlNode } from "./types";
+import { extensionConfig } from "../extension";
 
 export const jtoy = (json: string) => {
   if (!json) return "";
   const jsonObject = JSON.parse(json);
   const yamlObject = new YAML.Document(jsonObject);
   let yamlString;
-  if (vscode.workspace.getConfiguration("yjc").anchorInterop) {
+  if (extensionConfig.anchorInterop) {
     // @ts-ignore
     traverse({ tree: yamlObject.contents || [] });
     yamlString = yamlObject.toString().replace(/:\n\s+\&/g, ": &");

@@ -17,6 +17,8 @@ const convert = (text: string) => {
   return { lang: "error", data: "" };
 };
 
+export const extensionConfig = vscode.workspace.getConfiguration("yjc");
+
 export function activate(context: vscode.ExtensionContext) {
   console.log("YJC is now active!");
   const disposable = vscode.commands.registerCommand(

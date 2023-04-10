@@ -1,11 +1,11 @@
-import * as vscode from "vscode";
 import YAML, { Pair, Scalar } from "yaml";
 import { TreeParentCollection, YamlNode } from "./types";
+import { extensionConfig } from "../extension";
 
 export const ytoj = (yaml: string) => {
   if (!yaml) return "";
   const yamlObject = YAML.parseDocument(yaml);
-  if (vscode.workspace.getConfiguration("yjc").anchorInterop) {
+  if (extensionConfig.anchorInterop) {
     // @ts-ignore
     traverse({ tree: yamlObject.contents || [] });
   }

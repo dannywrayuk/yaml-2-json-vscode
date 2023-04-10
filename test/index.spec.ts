@@ -2,6 +2,10 @@ import { ytoj, jtoy } from "../src/converter/index";
 import { testCase } from "./resources/types";
 import { testCases } from "./resources/testCases";
 
+jest.mock("../src/extension", () => ({
+  extensionConfig: { anchorInterop: true },
+}));
+
 describe("When parsing yaml with", () => {
   testCases.forEach((x: testCase) =>
     it(x.description, () => {
