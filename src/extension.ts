@@ -51,7 +51,9 @@ export function activate(context: vscode.ExtensionContext) {
       try {
         fs.writeFileSync(altFile, convertedText.data);
       } catch (e) {
-        vscode.window.showErrorMessage("Error writing document.");
+        vscode.window.showErrorMessage(
+          "Error writing document.\n" + (e as Error).stack
+        );
         return;
       }
 
@@ -62,7 +64,9 @@ export function activate(context: vscode.ExtensionContext) {
         try {
           fs.rmSync(document.fileName);
         } catch (e) {
-          vscode.window.showErrorMessage("Error removing document.");
+          vscode.window.showErrorMessage(
+            "Error removing document.\n" + (e as Error).stack
+          );
         }
       }
       const newDocument = await vscode.workspace.openTextDocument(altFile);
